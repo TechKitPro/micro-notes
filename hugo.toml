@@ -43,6 +43,7 @@ copyright = 'TechKitPro'
 
 [params]
   mainSections = ["posts"]
+  dateFormat = "2006-01-02"
   [params.sidebar]
     emoji = "📝"
     subtitle = "记录技术点滴 | 编程、开发与学习心得"
@@ -82,10 +83,11 @@ copyright = 'TechKitPro'
 
 [markup]
   [markup.highlight]
-    noClasses = false
+    noClasses = true
     codeFences = true
     guessSyntax = true
     tabWidth = 2
+    lineNos = false
   [markup.goldmark.renderer]
     unsafe = true
 

@@ -7,3 +7,53 @@
 .article-list article {
     padding: 24px 28px;
 }
+
+// 代码块样式
+.article-content pre {
+    border-radius: 8px;
+    padding: 16px 20px;
+    overflow-x: auto;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.article-content code {
+    font-size: 14px;
+}
+
+.article-content :not(pre) > code {
+    background: var(--code-bg, rgba(127, 127, 127, 0.15));
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+// 引用块样式
+.article-content blockquote {
+    border-left: 4px solid var(--accent-color, #3a86ff);
+    padding: 12px 20px;
+    margin: 16px 0;
+    background: rgba(127, 127, 127, 0.08);
+    border-radius: 0 8px 8px 0;
+}
+
+// 表格样式
+.article-content table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 16px 0;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.article-content th,
+.article-content td {
+    border: 1px solid var(--border-color, rgba(127, 127, 127, 0.2));
+    padding: 10px 14px;
+    text-align: left;
+}
+
+.article-content th {
+    background: rgba(127, 127, 127, 0.1);
+    font-weight: 600;
+}
