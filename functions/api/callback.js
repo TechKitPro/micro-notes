@@ -37,8 +37,9 @@ export async function onRequest(context) {
       return new Response('Failed to obtain access token: ' + JSON.stringify(tokenData), { status: 400 })
     }
 
-    // 重定向到 callback.html，通过 URL hash 传递 token
-    const redirectUrl = new URL('https://micro-notes.pages.dev/admin/callback.html')
+    // 重定向回 admin 页面，通过 URL hash 传递 token
+    // Netlify CMS 会自动读取 URL hash 中的 token 并完成登录
+    const redirectUrl = new URL('https://micro-notes.pages.dev/admin/')
     redirectUrl.hash = `access_token=${accessToken}&token_type=bearer&provider=github`
 
     return Response.redirect(redirectUrl.toString(), 302)
