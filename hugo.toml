@@ -1,6 +1,6 @@
 baseURL = 'https://micro-notes.pages.dev/'
 title = 'Micro Notes'
-theme = 'stack'
+theme = 'hello-friend-ng'
 defaultContentLanguage = 'zh-cn'
 hasCJKLanguage = true
 timeZone = 'Asia/Shanghai'
