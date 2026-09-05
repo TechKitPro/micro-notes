@@ -10,14 +10,12 @@
     .spinner { width: 40px; height: 40px; border: 4px solid #ddd; border-top-color: #333; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 20px; }
     @keyframes spin { to { transform: rotate(360deg); } }
     .debug { font-size: 12px; color: #999; margin-top: 20px; max-width: 400px; word-break: break-all; text-align: left; }
-    button { padding: 10px 20px; font-size: 16px; cursor: pointer; background: #333; color: white; border: none; border-radius: 4px; margin-top: 10px; }
   </style>
 </head>
 <body>
   <div class="box">
-    <div class="spinner" id="spinner"></div>
+    <div class="spinner"></div>
     <div class="status" id="status">正在登录，请稍候...</div>
-    <button id="manualBtn" style="display:none;">如果没有自动登录，点此继续</button>
     <div class="debug" id="debug"></div>
   </div>
 
@@ -31,60 +29,49 @@
 
     var debugEl = document.getElementById('debug');
     var statusEl = document.getElementById('status');
-    var manualBtn = document.getElementById('manualBtn');
-    var sendCount = 0;
 
-    function sendToken() {
-      if (!params.access_token) {
-        statusEl.textContent = '登录失败：未获取到 access token';
-        document.getElementById('spinner').style.display = 'none';
-        debugEl.textContent = 'Hash: ' + hash;
-        return;
-      }
-
-      sendCount++;
-      debugEl.textContent = '尝试发送次数: ' + sendCount + '\nToken: ' + params.access_token.substring(0, 15) + '...\nOpener: ' + (window.opener ? '存在' : 'null') + '\nOpener origin: ' + (window.opener ? window.opener.location.origin : 'N/A');
-
-      // 只发送 token，不发送 code（避免 CMS 用 code 换 token 失败）
-      var message = {
-        token: params.access_token,
-        provider: 'github'
-      };
+    if (!params.access_token) {
+      statusEl.textContent = '登录失败：未获取到 access token';
+      debugEl.textContent = 'Hash: ' + hash;
+    } else {
+      var token = params.access_token;
+      debugEl.textContent = 'Token: ' + token.substring(0, 15) + '...\n';
 
       try {
-        window.opener.postMessage(message, '*');
-        statusEl.textContent = '登录成功！正在关闭窗口...';
-        document.getElementById('spinner').style.display = 'none';
-        setTimeout(function() { window.close(); }, 1500);
+        // 保存 token 到 localStorage（Decap CMS 会从这里读取）
+        var userData = {
+          token: token,
+          provider: 'github',
+          name: 'GitHub User'
+        };
+
+        // 尝试多个可能的 localStorage key
+        localStorage.setItem('decap-cms-user', JSON.stringify(userData));
+        localStorage.setItem('netlify-cms-user', JSON.stringify(userData));
+        localStorage.setItem('github-token', token);
+
+        debugEl.textContent += 'Token 已保存到 localStorage\n';
+        statusEl.textContent = '登录成功！正在跳转...';
+
+        // 通过 postMessage 通知主窗口
+        if (window.opener) {
+          window.opener.postMessage({ token: token, provider: 'github' }, '*');
+          debugEl.textContent += '已通知主窗口\n';
+        }
+
+        // 刷新主窗口，让 Decap CMS 从 localStorage 读取 token 并自动登录
+        setTimeout(function() {
+          if (window.opener && !window.opener.closed) {
+            window.opener.location.href = 'https://micro-notes.pages.dev/admin/#/collections/posts';
+          }
+          window.close();
+        }, 1000);
+
       } catch (e) {
-        debugEl.textContent += '\nError: ' + e.message;
-        manualBtn.style.display = 'block';
+        debugEl.textContent += 'Error: ' + e.message;
+        statusEl.textContent = '登录失败';
       }
     }
-
-    // 立即发送
-    sendToken();
-
-    // 多次重试发送（确保主窗口能接收到）
-    var retryCount = 0;
-    var retryInterval = setInterval(function() {
-      retryCount++;
-      if (retryCount >= 5 || window.closed) {
-        clearInterval(retryInterval);
-        if (!window.closed) {
-          manualBtn.style.display = 'block';
-          statusEl.textContent = '如果没有自动登录，请点击下方按钮';
-          document.getElementById('spinner').style.display = 'none';
-        }
-        return;
-      }
-      sendToken();
-    }, 800);
-
-    manualBtn.onclick = function() {
-      sendToken();
-      setTimeout(function() { window.close(); }, 1000);
-    };
   </script>
 </body>
 </html>
