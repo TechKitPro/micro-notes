@@ -54,3 +54,89 @@
 [data-theme="dark"] .post-entry:hover {
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
 }
+
+/* 随机背景图 */
+body.has-bg {
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+body.has-bg .main {
+    background: rgba(255, 255, 255, 0.82);
+    border-radius: 12px;
+    padding: 24px;
+    margin-top: 20px;
+    backdrop-filter: blur(8px);
+}
+
+[data-theme="dark"] body.has-bg .main,
+body.has-bg[data-theme="dark"] .main {
+    background: rgba(30, 30, 34, 0.85);
+}
+
+@media (prefers-color-scheme: dark) {
+    body.has-bg .main {
+        background: rgba(30, 30, 34, 0.85);
+    }
+}
+
+body.has-bg .post-entry,
+body.has-bg .first-entry.home-info,
+body.has-bg .post-content {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(4px);
+}
+
+[data-theme="dark"] body.has-bg .post-entry,
+[data-theme="dark"] body.has-bg .first-entry.home-info,
+[data-theme="dark"] body.has-bg .post-content,
+body.has-bg[data-theme="dark"] .post-entry,
+body.has-bg[data-theme="dark"] .first-entry.home-info,
+body.has-bg[data-theme="dark"] .post-content {
+    background: rgba(40, 40, 45, 0.8);
+}
+
+@media (prefers-color-scheme: dark) {
+    body.has-bg .post-entry,
+    body.has-bg .first-entry.home-info,
+    body.has-bg .post-content {
+        background: rgba(40, 40, 45, 0.8);
+    }
+}
+
+body.has-bg .header {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(8px);
+    border-radius: 0 0 12px 12px;
+}
+
+[data-theme="dark"] body.has-bg .header,
+body.has-bg[data-theme="dark"] .header {
+    background: rgba(30, 30, 34, 0.85);
+}
+
+@media (prefers-color-scheme: dark) {
+    body.has-bg .header {
+        background: rgba(30, 30, 34, 0.85);
+    }
+}
+
+body.has-bg .footer {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(8px);
+    border-radius: 12px 12px 0 0;
+    margin-top: 20px;
+}
+
+[data-theme="dark"] body.has-bg .footer,
+body.has-bg[data-theme="dark"] .footer {
+    background: rgba(30, 30, 34, 0.85);
+}
+
+@media (prefers-color-scheme: dark) {
+    body.has-bg .footer {
+        background: rgba(30, 30, 34, 0.85);
+    }
+}
