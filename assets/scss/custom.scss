@@ -3,6 +3,13 @@
     max-width: 1200px;
 }
 
+// 文章详情页居中
+.single .main {
+    margin: 0 auto;
+    max-width: 860px;
+    float: none;
+}
+
 // 文章内容宽度
 .article-page {
     max-width: 1000px;
