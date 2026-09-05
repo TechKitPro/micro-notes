@@ -37,8 +37,8 @@ export async function onRequest(context) {
       return new Response('Failed to obtain access token: ' + JSON.stringify(tokenData), { status: 400 })
     }
 
-    // 重定向回 CMS，通过 URL hash 传递 token
-    const redirectUrl = new URL(state)
+    // 重定向到 callback.html，通过 URL hash 传递 token
+    const redirectUrl = new URL('https://micro-notes.pages.dev/admin/callback.html')
     redirectUrl.hash = `access_token=${accessToken}&token_type=bearer&provider=github`
 
     return Response.redirect(redirectUrl.toString(), 302)
