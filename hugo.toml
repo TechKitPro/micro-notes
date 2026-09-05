@@ -1,10 +1,16 @@
 baseURL = 'https://micro-notes.pages.dev/'
 title = 'Micro Notes'
-theme = 'hello-friend-ng'
+theme = 'terminal'
 defaultContentLanguage = 'zh-cn'
 hasCJKLanguage = true
 timeZone = 'Asia/Shanghai'
 paginate = 10
+
+[author]
+  name = "TechKitPro"
+  url = "https://github.com/TechKitPro"
+  avatar = ""
+  bio = "记录技术点滴"
 
 [languages]
   [languages."zh-cn"]
