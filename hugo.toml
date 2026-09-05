@@ -39,6 +39,8 @@ paginate = 10
   ShowPostNavLinks = true
   ShowBreadCrumbs = true
   ShowCodeCopyButtons = true
+  [params.footer]
+    showPoweredBy = false
   [[params.socialIcons]]
     name = "github"
     url = "https://github.com/TechKitPro"
