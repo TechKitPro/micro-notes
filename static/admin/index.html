@@ -3,10 +3,55 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
     <title>Micro Notes 内容管理</title>
   </head>
   <body>
-    <!-- Include the Decap CMS script -->
+    <script>
+      // 内联配置，避免 config.yml 缓存问题
+      window.CMS_CONFIGURATION = {
+        backend: {
+          name: "github",
+          repo: "TechKitPro/micro-notes",
+          branch: "main",
+          base_url: "https://micro-notes.pages.dev/api"
+        },
+        local_backend: false,
+        media_folder: "static/img/uploads",
+        public_folder: "/img/uploads",
+        collections: [
+          {
+            name: "posts",
+            label: "文章",
+            folder: "content/posts",
+            create: true,
+            slug: "{{slug}}",
+            fields: [
+              { label: "标题", name: "title", widget: "string" },
+              { label: "发布日期", name: "date", widget: "datetime" },
+              { label: "分类", name: "categories", widget: "list", required: false },
+              { label: "标签", name: "tags", widget: "list", required: false },
+              { label: "草稿", name: "draft", widget: "boolean", default: false, required: false },
+              { label: "正文", name: "body", widget: "markdown" }
+            ]
+          },
+          {
+            name: "about",
+            label: "关于页面",
+            folder: "content/about",
+            create: false,
+            slug: "index",
+            fields: [
+              { label: "标题", name: "title", widget: "string" },
+              { label: "发布日期", name: "date", widget: "datetime" },
+              { label: "正文", name: "body", widget: "markdown" }
+            ]
+          }
+        ]
+      };
+    </script>
     <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   </body>
 </html>
