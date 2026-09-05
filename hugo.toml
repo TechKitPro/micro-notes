@@ -43,7 +43,9 @@ copyright = 'TechKitPro'
 
 [params]
   mainSections = ["posts"]
-  dateFormat = "2006-01-02"
+  [params.dateFormat]
+    published = "2006-01-02"
+    lastUpdated = "2006-01-02 15:04"
   [params.sidebar]
     emoji = "📝"
     subtitle = "记录技术点滴 | 编程、开发与学习心得"
