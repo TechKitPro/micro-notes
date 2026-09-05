@@ -4,19 +4,24 @@
   <meta charset="utf-8">
   <title>登录中...</title>
   <style>
-    body { font-family: sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; }
-    .status { font-size: 18px; margin-bottom: 20px; }
-    .debug { font-size: 12px; color: #666; margin-top: 20px; max-width: 400px; word-break: break-all; }
-    button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
+    body { font-family: sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; background: #f5f5f5; }
+    .box { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); text-align: center; }
+    .status { font-size: 18px; margin-bottom: 20px; color: #333; }
+    .spinner { width: 40px; height: 40px; border: 4px solid #ddd; border-top-color: #333; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 20px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .debug { font-size: 12px; color: #999; margin-top: 20px; max-width: 400px; word-break: break-all; text-align: left; }
+    button { padding: 10px 20px; font-size: 16px; cursor: pointer; background: #333; color: white; border: none; border-radius: 4px; margin-top: 10px; }
   </style>
 </head>
 <body>
-  <div class="status" id="status">正在登录，请稍候...</div>
-  <button id="manualBtn" style="display:none;">手动完成登录</button>
-  <div class="debug" id="debug"></div>
+  <div class="box">
+    <div class="spinner" id="spinner"></div>
+    <div class="status" id="status">正在登录，请稍候...</div>
+    <button id="manualBtn" style="display:none;">如果没有自动登录，点此继续</button>
+    <div class="debug" id="debug"></div>
+  </div>
 
   <script>
-    // 从 URL hash 中解析 token
     var hash = window.location.hash.substring(1);
     var params = {};
     hash.split('&').forEach(function(pair) {
@@ -27,50 +32,59 @@
     var debugEl = document.getElementById('debug');
     var statusEl = document.getElementById('status');
     var manualBtn = document.getElementById('manualBtn');
+    var sendCount = 0;
 
     function sendToken() {
       if (!params.access_token) {
         statusEl.textContent = '登录失败：未获取到 access token';
+        document.getElementById('spinner').style.display = 'none';
         debugEl.textContent = 'Hash: ' + hash;
-        return false;
+        return;
       }
 
-      debugEl.textContent = 'Token: ' + params.access_token.substring(0, 20) + '...\nOpener: ' + (window.opener ? '存在' : 'null');
+      sendCount++;
+      debugEl.textContent = '尝试发送次数: ' + sendCount + '\nToken: ' + params.access_token.substring(0, 15) + '...\nOpener: ' + (window.opener ? '存在' : 'null') + '\nOpener origin: ' + (window.opener ? window.opener.location.origin : 'N/A');
 
-      // Decap CMS 标准消息格式（同时发送 code 和 token）
+      // 只发送 token，不发送 code（避免 CMS 用 code 换 token 失败）
       var message = {
-        code: params.access_token,
         token: params.access_token,
         provider: 'github'
       };
 
       try {
         window.opener.postMessage(message, '*');
-        statusEl.textContent = '登录成功！正在关闭...';
-        setTimeout(function() { window.close(); }, 1000);
-        return true;
+        statusEl.textContent = '登录成功！正在关闭窗口...';
+        document.getElementById('spinner').style.display = 'none';
+        setTimeout(function() { window.close(); }, 1500);
       } catch (e) {
         debugEl.textContent += '\nError: ' + e.message;
-        return false;
-      }
-    }
-
-    // 自动发送
-    var sent = sendToken();
-
-    // 如果自动发送失败，显示手动按钮
-    if (!sent) {
-      manualBtn.style.display = 'block';
-      manualBtn.onclick = sendToken;
-    }
-
-    // 3秒后如果还没关闭，显示手动按钮
-    setTimeout(function() {
-      if (!window.closed) {
         manualBtn.style.display = 'block';
-        statusEl.textContent = '如果没有自动登录，请点击下方按钮';
       }
-    }, 3000);
+    }
+
+    // 立即发送
+    sendToken();
+
+    // 多次重试发送（确保主窗口能接收到）
+    var retryCount = 0;
+    var retryInterval = setInterval(function() {
+      retryCount++;
+      if (retryCount >= 5 || window.closed) {
+        clearInterval(retryInterval);
+        if (!window.closed) {
+          manualBtn.style.display = 'block';
+          statusEl.textContent = '如果没有自动登录，请点击下方按钮';
+          document.getElementById('spinner').style.display = 'none';
+        }
+        return;
+      }
+      sendToken();
+    }, 800);
+
+    manualBtn.onclick = function() {
+      sendToken();
+      setTimeout(function() { window.close(); }, 1000);
+    };
   </script>
 </body>
 </html>
