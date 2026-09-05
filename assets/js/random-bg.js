@@ -11,8 +11,8 @@
     var randomBg = bgImages[Math.floor(Math.random() * bgImages.length)];
     var img = new Image();
     img.onload = function () {
+        document.body.classList.add('has-random-bg');
         document.body.style.backgroundImage = 'url(' + randomBg + ')';
-        document.body.classList.add('has-bg');
     };
     img.src = randomBg;
 })();

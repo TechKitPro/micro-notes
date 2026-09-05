@@ -1,77 +1,80 @@
 baseURL = 'https://micro-notes.pages.dev/'
 title = 'Micro Notes'
-theme = 'PaperMod'
-defaultContentLanguage = 'zh'
+theme = 'stack'
+defaultContentLanguage = 'zh-cn'
 hasCJKLanguage = true
 enableRobotsTXT = true
 enableEmoji = true
 paginate = 10
 timeZone = 'Asia/Shanghai'
+copyright = 'TechKitPro'
 
 [languages]
-  [languages.zh]
+  [languages."zh-cn"]
     label = "简体中文"
     weight = 1
-    [languages.zh.params]
+    [languages."zh-cn".params]
       description = "记录技术点滴"
-    [[languages.zh.menu.main]]
+    [[languages."zh-cn".menu.main]]
       identifier = "home"
       name = "首页"
       url = "/"
       weight = 1
-    [[languages.zh.menu.main]]
+    [[languages."zh-cn".menu.main]]
       identifier = "archives"
       name = "归档"
       url = "/archives/"
       weight = 2
-    [[languages.zh.menu.main]]
+    [[languages."zh-cn".menu.main]]
       identifier = "categories"
       name = "分类"
       url = "/categories/"
       weight = 3
-    [[languages.zh.menu.main]]
+    [[languages."zh-cn".menu.main]]
       identifier = "tags"
       name = "标签"
       url = "/tags/"
       weight = 4
-    [[languages.zh.menu.main]]
+    [[languages."zh-cn".menu.main]]
       identifier = "about"
       name = "关于"
       url = "/about/"
       weight = 5
 
 [params]
-  env = "production"
-  title = "Micro Notes"
-  description = "基于 Hugo 构建的技术笔记博客，记录编程、开发与学习心得"
-  author = "TechKitPro"
-  keywords = ["技术博客", "笔记", "编程", "开发"]
-  DateFormat = "2006-01-02"
-  defaultTheme = "auto"
-  disableThemeToggle = false
-  ShowReadingTime = true
-  ShowWordCount = true
-  ShowPostNavLinks = true
-  ShowBreadCrumbs = true
-  ShowCodeCopyButtons = true
-  ShowFullTextinRSS = true
-  comments = false
-  assets.disableHLJS = false
-  homeInfoParams = { Title = "Micro Notes", Content = "记录技术点滴 | 编程、开发与学习心得" }
-  socialIcons = [
-    { name = "github", url = "https://github.com/TechKitPro" }
-  ]
+  [params.sidebar]
+    emoji = "📝"
+    subtitle = "记录技术点滴 | 编程、开发与学习心得"
+    avatar = "https://bu.dusays.com/2023/04/27/64496e511b09c.jpg"
+    [params.sidebar.links]
+      github = "https://github.com/TechKitPro"
 
-  [params.editPost]
-    URL = "https://github.com/TechKitPro/micro-notes/tree/main/content"
-    Text = "建议修改"
-    appendFilePath = true
+  [params.article]
+    readingTime = true
+    wordCount = true
+    [params.article.license]
+      enabled = true
+      default = "CC BY-NC-SA 4.0"
+    [params.article.math]
+      enable = false
 
-  [params.fuseOpts]
-    ignoreLocation = true
-    threshold = 0.4
-    minMatchCharLength = 2
-    keys = ["title", "permalink", "summary", "content"]
+  [params.footer]
+    since = 2026
+    customText = "由 Hugo + Stack 主题驱动"
+
+  [params.colorScheme]
+    toggle = true
+
+  [params.image]
+    process = "resize 2000x"
+    [params.image.lightGallery]
+      enable = true
+      [params.image.lightGallery.options]
+        selector = ".article-image"
+
+  [params.search]
+    enable = true
+    type = "fuse"
 
 [outputs]
   home = ["HTML", "RSS", "JSON"]
