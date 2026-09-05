@@ -1,11 +1,8 @@
 ---
-title: Hello World
+title: "Hello World"
 date: 2026-09-05T14:00:00+08:00
-categories:
-  - 随笔
-tags:
-  - 欢迎
-  - Hugo
+categories: ["随笔"]
+tags: ["欢迎", "Hugo"]
 draft: false
 ---
 
@@ -20,7 +17,7 @@ draft: false
 ### 新建文章
 
 ```bash
-hugo new content posts/文章标题.md
+hugo new posts/文章标题.md
 ```
 
 ### 生成静态文件
@@ -34,10 +31,6 @@ hugo
 ```bash
 hugo server
 ```
-
-### 部署
-
-推送到 Git 仓库后，Cloudflare Pages 会自动构建部署。
 
 ## Markdown 示例
 
@@ -59,5 +52,6 @@ function hello() {
 - 代码高亮
 - 标签和分类
 - 响应式主题
+- 深色/浅色模式切换
 
 感谢访问，祝阅读愉快！
