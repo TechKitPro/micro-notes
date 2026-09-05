@@ -6,11 +6,6 @@ draft: false
 
 ## 关于本站
 
-**Micro Notes** 是一个基于 [Hugo](https://gohugo.io/) + [PaperMod](https://github.com/adityatelange/hugo-PaperMod) 主题构建的技术笔记博客，托管于 Cloudflare Pages。
-
-这里记录编程、开发与学习过程中的点滴心得。
-
-## 联系方式
+Micro Notes 是基于 Hugo + Stack 主题构建的技术笔记博客。
 
 - GitHub: [TechKitPro](https://github.com/TechKitPro)
-- 仓库: [micro-notes](https://github.com/TechKitPro/micro-notes)
