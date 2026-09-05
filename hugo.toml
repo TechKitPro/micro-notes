@@ -1,16 +1,10 @@
 baseURL = 'https://micro-notes.pages.dev/'
 title = 'Micro Notes'
-theme = 'terminal'
+theme = 'PaperMod'
 defaultContentLanguage = 'zh-cn'
 hasCJKLanguage = true
 timeZone = 'Asia/Shanghai'
 paginate = 10
-
-[author]
-  name = "TechKitPro"
-  url = "https://github.com/TechKitPro"
-  avatar = ""
-  bio = "记录技术点滴"
 
 [languages]
   [languages."zh-cn"]
@@ -44,12 +38,18 @@ paginate = 10
 
 [params]
   mainSections = ["posts"]
-  [params.sidebar]
-    subtitle = "记录技术点滴"
-    [params.sidebar.links]
-      github = "https://github.com/TechKitPro"
-  [params.footer]
-    since = 2026
+  defaultTheme = "auto"
+  ShowReadingTime = true
+  ShowWordCount = true
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowCodeCopyButtons = true
+  [[params.socialIcons]]
+    name = "github"
+    url = "https://github.com/TechKitPro"
+
+[outputs]
+  home = ["HTML", "RSS"]
 
 [taxonomies]
   category = "categories"
