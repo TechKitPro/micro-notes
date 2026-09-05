@@ -1,6 +1,10 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: TechKitPro/micro-notes
   branch: main
+  base_url: https://micro-notes-oauth.569818163.workers.dev
+
+local_backend: false
 
 media_folder: "static/img/uploads"
 public_folder: "/img/uploads"
