@@ -14,6 +14,7 @@ export async function onRequest(context) {
   authUrl.searchParams.set('client_id', GITHUB_CLIENT_ID)
   authUrl.searchParams.set('scope', 'repo')
   authUrl.searchParams.set('state', state)
+  authUrl.searchParams.set('redirect_uri', 'https://micro-notes.pages.dev/api/callback')
 
   return Response.redirect(authUrl.toString(), 302)
 }
