@@ -17,7 +17,6 @@
     <div class="status" id="status">正在登录...</div>
   </div>
   <script>
-    // 从 URL hash 解析 token
     var hash = window.location.hash.substring(1);
     var params = {};
     hash.split('&').forEach(function(pair) {
@@ -25,17 +24,35 @@
       params[decodeURIComponent(parts[0])] = decodeURIComponent(parts[1] || '');
     });
 
-    if (params.access_token && window.opener) {
-      // 发送 token 给主窗口（Netlify CMS 格式）
-      window.opener.postMessage({
-        token: params.access_token,
-        provider: 'github'
-      }, '*');
+    if (params.access_token) {
+      var token = params.access_token;
 
-      document.getElementById('status').textContent = '登录成功！';
-      setTimeout(function() { window.close(); }, 800);
+      // 保存 token 到 localStorage（Netlify CMS 格式）
+      var userData = {
+        token: token,
+        provider: 'github',
+        name: 'GitHub User',
+        login: 'github-user'
+      };
+      localStorage.setItem('netlify-cms-user', JSON.stringify(userData));
+      localStorage.setItem('decap-cms-user', JSON.stringify(userData));
+
+      // 同时通知主窗口
+      if (window.opener) {
+        window.opener.postMessage({ token: token, provider: 'github' }, '*');
+      }
+
+      document.getElementById('status').textContent = '登录成功！正在跳转...';
+
+      // 刷新主窗口，让 Netlify CMS 从 localStorage 读取 token
+      setTimeout(function() {
+        if (window.opener && !window.opener.closed) {
+          window.opener.location.href = 'https://micro-notes.pages.dev/admin/#/collections/posts';
+        }
+        window.close();
+      }, 1000);
     } else {
-      document.getElementById('status').textContent = params.access_token ? '无法连接主窗口' : '未获取到 token';
+      document.getElementById('status').textContent = '未获取到 token';
     }
   </script>
 </body>
