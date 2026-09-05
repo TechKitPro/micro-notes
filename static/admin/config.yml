@@ -2,7 +2,7 @@ backend:
   name: github
   repo: TechKitPro/micro-notes
   branch: main
-  base_url: https://micro-notes-oauth.569818163.workers.dev
+  base_url: https://micro-notes.pages.dev/api
 
 local_backend: false
 
