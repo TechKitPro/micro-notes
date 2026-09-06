@@ -1,6 +1,6 @@
 /* 文章卡片样式 */
 
-/* 首页文章列表项 */
+/* 首页文章列表项 - 有卡片框 */
 .post-entry {
     border: 1px solid var(--border);
     border-radius: 10px;
@@ -28,13 +28,12 @@
     margin-top: 12px;
 }
 
-/* 文章详情页 */
+/* 文章详情页 - 无边框 */
 .post-single {
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 32px 36px;
-    background: var(--entry);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
+    border: none;
 }
 
 .post-single .post-header {
@@ -53,7 +52,7 @@
     border-top: 1px solid var(--border);
 }
 
-/* 代码块样式优化 */
+/* 代码块样式 */
 .post-content pre {
     border: 1px solid var(--border);
     border-radius: 8px;
