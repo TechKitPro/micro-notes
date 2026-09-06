@@ -1,0 +1,115 @@
+/* 文章卡片样式 */
+
+/* 首页文章列表项 */
+.post-entry {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+    background: var(--entry);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.post-entry:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+.post-entry .entry-header h2 {
+    margin: 0 0 8px 0;
+}
+
+.post-entry .entry-content {
+    margin: 8px 0;
+}
+
+.post-entry .entry-footer {
+    margin-top: 12px;
+}
+
+/* 文章详情页 */
+.post-single {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 32px 36px;
+    background: var(--entry);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.post-single .post-header {
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+}
+
+.post-single .post-content {
+    line-height: 1.8;
+}
+
+.post-single .post-footer {
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+}
+
+/* 代码块样式优化 */
+.post-content pre {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+}
+
+.post-content code {
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-size: 0.9em;
+}
+
+.post-content pre code {
+    padding: 0;
+    background: transparent;
+}
+
+/* 引用块样式 */
+.post-content blockquote {
+    border-left: 4px solid var(--tertiary);
+    border-radius: 0 8px 8px 0;
+    padding: 12px 20px;
+    margin: 16px 0;
+    background: var(--code-bg);
+}
+
+/* 表格样式 */
+.post-content table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 16px 0;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.post-content th,
+.post-content td {
+    border: 1px solid var(--border);
+    padding: 10px 14px;
+    text-align: left;
+}
+
+.post-content th {
+    background: var(--code-bg);
+    font-weight: 600;
+}
+
+.post-content tr:nth-child(even) {
+    background: var(--code-bg);
+}
+
+/* 图片样式 */
+.post-content img {
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    max-width: 100%;
+    height: auto;
+}
