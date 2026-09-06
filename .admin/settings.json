@@ -1,0 +1,19 @@
+{
+  "ai": {
+    "base_url": "https://api.deepseek.com",
+    "model": "deepseek-chat"
+  },
+  "hugo": {
+    "base_dir": "C:\\Users\\Administrator\\Doubao\\chats\\2026-09-05\\new-chat\\micro-notes",
+    "server_url": "http://127.0.0.1:1313"
+  },
+  "listmonk": {
+    "api_url": "",
+    "api_user": "",
+    "api_key": "",
+    "blog_list_id": 1
+  },
+  "theme": {
+    "name": ""
+  }
+}
